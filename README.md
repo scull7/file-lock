@@ -34,8 +34,8 @@ Lock.obtain(lockFilePath, process.pid)
 
 ### API
 
-#### Lock.obtain :: String -> Int -> Result (Bool, String)
+#### Lock.obtain :: String -> Int -> Promise Result (Bool, String)
 
-#### Lock.release :: String -> Int -> Result (Bool, String)
+#### Lock.release :: String -> Int -> Promise Result (Bool, String)
 
-#### Lock.hasLock :: String -> Int -> Result (Bool, String)
+#### Lock.hasLock :: String -> Int -> Promise Result (Bool, String)
