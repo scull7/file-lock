@@ -6,6 +6,8 @@ File      = require '../../lib/file.js'
 _ts       = -> (new Date()).getTime()
 _getPath  = (name) -> "/tmp/#{name}-#{_ts()}"
 
+notFoundRegExp  = (path) -> new RegExp("ENOENT.*access\\s'#{path}'")
+
 describe 'File Interface', ->
 
   describe '::exists', ->
@@ -14,11 +16,10 @@ describe 'File Interface', ->
     ->
 
       dnePath   = _getPath 'does-not-exist'
-      expected  =
-        ok      : false
-        msg     : "ENOENT: no such file or directory, access '#{dnePath}'"
 
-      File.exists(dnePath).then (actual) -> assert.deepEqual actual, expected
+      File.exists(dnePath).then (actual) ->
+        assert.equal actual.ok, false
+        assert.equal notFoundRegExp(dnePath).test(actual.msg), true
 
     it 'should respond with a Result(true, \'\') when a file exists', ->
 
@@ -55,12 +56,10 @@ describe 'File Interface', ->
         ok      : true
         msg     : ''
 
-      expected2 =
-        ok      : false
-        msg     : "ENOENT: no such file or directory, access '#{path}'"
-
       File.writeLock path, 1234
       .then -> File.deleteLock path
       .then (actual) -> assert.deepEqual actual, expected
       .then -> File.exists(path)
-      .then (actual2) -> assert.deepEqual actual2, expected2
+      .then (actual2) ->
+        assert.equal actual2.ok, false
+        assert.equal notFoundRegExp(path).test(actual2.msg), true
