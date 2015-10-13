@@ -1,0 +1,31 @@
+{
+  "name": "file-lock",
+  "version": "1.0.0",
+  "description": "A small, process ID (pid), file based locking mechanism for node processes.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scull7/file-lock.git"
+  },
+  "keywords": [
+    "lock",
+    "process",
+    "file"
+  ],
+  "author": "Nathan A Sculli <scull7@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scull7/file-lock/issues"
+  },
+  "homepage": "https://github.com/scull7/file-lock#readme",
+  "devDependencies": {
+    "coffee-script": "^1.10.0",
+    "mocha": "^2.3.3"
+  }
+}
